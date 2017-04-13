@@ -2,7 +2,7 @@ import twitter
 import yaml
 
 # get config from yml
-with open("config.yaml", 'r') as stream:
+with open("/home/mister-roboto/config.yaml", 'r') as stream:
     try:
         config = yaml.load(stream)
     except yaml.YAMLError as exc:
@@ -16,7 +16,7 @@ api = twitter.Api(consumer_key=config["CONSUMER_KEY"],
 
 # favorites and rewteets - topic 1
 results = api.GetSearch(
-    raw_query="q=scholarship&count=5")
+    raw_query="q=scholarship&count=2")
 
 for r in results:
   api.CreateFavorite(r)
@@ -29,13 +29,13 @@ for r in results:
 
 # favorites and retweets - topic 2
 results = api.GetSearch(
-    raw_query="q=college&count=5")
+    raw_query="q=college&count=2")
 
 for r in results:
   api.CreateFavorite(r)
 
 results = api.GetSearch(
-  raw_query="q=college&count=1")
+  raw_query="q=university&count=1")
 
 for r in results:
   api.PostRetweet(r.id)
